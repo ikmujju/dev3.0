@@ -1,0 +1,37 @@
+body{
+    font-size: small;
+}
+.main-box{
+    height: 98%;
+    width: 98%;
+    display: flex;
+    position:absolute;
+    align-items: center;
+    justify-content: center;
+}
+.box1{
+    background-color: #242424;
+    display: flex;
+    height: 320px;
+    width: 300px;
+    border-radius: 10px;
+    justify-content: center; 
+     flex-direction: column;
+    padding: 10px;
+    font-weight: 600;
+    color: azure; 
+ } 
+ .box1 h2{
+    display: flex;
+    justify-content: center;
+}
+.line{
+    margin-top: 10px;
+}
+.line p{
+    display: flex;
+    justify-content: center;
+    font-size: small;
+}
+
+

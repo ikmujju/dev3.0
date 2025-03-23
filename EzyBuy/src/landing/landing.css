@@ -1,0 +1,97 @@
+body{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.Head{
+    background-color: rgba(0, 0, 0, 0.966);
+    color : rgb(255, 255, 255);
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    border-bottom:2px solid  #ffffff;
+    /* backdrop-filter: blur(10px); */
+}
+.Head h2{
+    margin-left: 10px;
+}
+.Btn{
+    background-color: transparent;
+    border: 2px solid rgb(255, 255, 255);
+    color: rgb(255, 255, 255);
+    margin-right: 10px;
+    transition: 0.8s ease-in-out;
+    font-weight: 900;
+    width: 60px;
+    border-radius: 5px;
+   
+}
+.Btn:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0); 
+}
+.content-2{
+        color: rgb(253, 252, 252);
+        display: flex;
+        align-items: center;
+        background-image: url('banner.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        justify-content: center;
+        flex-direction: column;
+        height: 600px;
+        width: 100%;
+        border-bottom:2px solid #ffffff;
+}
+.content-2  h1{
+    font-size: 70px;
+    margin-bottom: 40px;
+    color: black;
+  
+}
+.content-2 p{
+    margin-top: -40px;
+    font-weight:600;
+    font-size: large;
+    color: black;
+}
+.foot{
+    height: 300px;
+    background-color: #242424;
+    box-shadow: inset;
+    color: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-items: center;
+    justify-items: center;
+    align-content: space-between;
+    align-content: center;
+}
+.foot-2{
+    text-align: center;
+    background-color: #242424;
+    position: absolute;
+    width: 99.99%;
+    color: aliceblue;
+}
+.profileimage{
+        height: fit-content;
+        width: 140px;
+}
+.exp{
+    background-color: transparent;
+    height: 30px;
+    width: 120px;
+    color: black;
+    border:2px solid black;
+    font-weight: 600;
+    transition: 1s ease-in-out;
+}
+.exp:hover{
+    background-color: black;
+    color: #ffffff;
+}
+.content-2 p h1 {
+    margin-right:0px;
+}

@@ -1,0 +1,56 @@
+body{
+    font-size: small;
+}
+.main-box{
+    height: 98%;
+    width: 98%;
+    display: flex;
+    position:absolute;
+    align-items: center;
+    justify-content: center;
+}
+
+.box--1
+{
+    background-color: #242424;
+    display: flex;
+    height: 400px;
+    width: 390px;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 600;
+    color: azure;
+    padding-left: 25px;
+    padding-right: 25px;
+    border-radius: 10px;
+}
+.h2{
+    color: aliceblue;
+}
+.box1 h2{
+    display: flex;
+    color: aliceblue;
+    justify-content: center;
+}
+.line{
+    margin-top: 10px;
+}
+.line p{
+    display: flex;
+    justify-content: center;
+    font-size: small;
+}
+.btnn{
+    background-color: rgb(21, 94, 158);
+    color: rgb(255, 255, 255);
+    transition: 0.5s ease-in-out;
+    border: none;
+}
+.btnn:hover{
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+#a{
+    color: antiquewhite;
+}

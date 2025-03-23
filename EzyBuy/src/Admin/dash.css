@@ -1,0 +1,68 @@
+.Admin-Header{
+    background-color: black;
+    height: 90px;
+    display: flex;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+
+}
+.headim{
+    height:180px;
+     width:170px;   
+}
+.ad-h3{
+
+    margin-right: 20px;
+}
+.sidebar{
+    background-color: black;
+    height: 87.8%;;
+    width: 200px;
+    color: azure;
+    
+    display: flex;
+    font-size: 20px;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0;
+    gap: 30px;
+    transition: 0.7s  ease-in-out;
+}
+.listt{
+    list-style: none;
+    text-decoration: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 30px;
+    padding-right: 10px;
+    width: 170px;
+    transition: 0.8s ease-in-out;
+    margin-bottom: 30px;
+    margin-right:20px;
+    position: relative;
+    border-start-end-radius: 20px ;
+}
+.listt:hover{
+    background-color: azure;
+    color:black;
+}
+.logoutad{
+    background-color: rgba(255, 0, 0, 0.412);
+    color:rgba(255, 255, 255, 0.588);
+    width:180px;
+    border: none;
+    transition: 0.7s ease-in-out;
+}
+.logoutad:hover{
+    background-color: rgba(157, 2, 2, 0.779);
+    color: rgb(238, 238, 238);
+    text-align: center;
+}
+.sidebar a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
