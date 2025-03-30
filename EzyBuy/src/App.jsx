@@ -16,6 +16,7 @@ import OrderTracking from "./Ordertracking.jsx/OrderTracking";
 import TotalSales from "./Totalsales/Totalsales";
 import AboutUs from "./About us/Aboutus";
 import ContactForm from "./assets/Contact/Contactus";
+import UpiPayment from "./Upi/UpiPayment";
 
 
 function App(){
@@ -80,6 +81,10 @@ function App(){
      {
       path:"/ordertrack",
       element:<OrderTracking/>
+     },
+     {
+      path:"/upi",
+      element:<UpiPayment/>
      },
   ])
 return(

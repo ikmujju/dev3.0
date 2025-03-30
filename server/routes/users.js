@@ -10,6 +10,7 @@ import { Admin } from "../models/Admin.js";
 import { Sales } from "../models/Sales.js";
 import { Contactus } from "../models/Contactus.js";
 
+
 const router = express.Router();
 
 // ✅ Signup
@@ -238,56 +239,102 @@ router.post("/cart/remove", verifyUser, async (req, res) => {
 
 router.post("/order/place", verifyUser, async (req, res) => {
     try {
-      const userEmail = req.user.email;
-      const { paymentMethod, shippingAddress } = req.body;
-  
-      const cart = await Cart.findOne({ userEmail });
-  
-      if (!cart || cart.products.length === 0) {
-        return res.status(400).json({ message: "Cart is empty" });
-      }
-  
-      if (!paymentMethod || !shippingAddress) {
-        return res.status(400).json({ message: "Payment method and shipping address are required" });
-      }
-  
-      // Check stock before creating order
-      for (let item of cart.products) {
-        const product = await Product.findById(item.productId);
-        if (!product) {
-          return res.status(404).json({ message: `Product ${item.name} not found` });
+        const userEmail = req.user.email;
+        const { paymentMethod, shippingAddress } = req.body;
+
+        const cart = await Cart.findOne({ userEmail });
+
+        if (!cart || cart.products.length === 0) {
+            return res.status(400).json({ message: "Cart is empty" });
         }
-        if (product.stock < item.quantity) {
-          return res.status(400).json({ message: `Not enough stock for ${product.name}` });
+
+        if (!paymentMethod || !shippingAddress) {
+            return res.status(400).json({ message: "Payment method and shipping address are required" });
         }
-      }
-  
-      // Decrease stock
-      for (let item of cart.products) {
-        await Product.findByIdAndUpdate(
-          item.productId,
-          { $inc: { stock: -item.quantity } }, // Decrease stock
-          { new: true }
-        );
-      }
-  
-      const newOrder = new Order({
-        userEmail,
-        products: cart.products,
-        totalPrice: cart.totalPrice,
-        paymentMethod,
-        shippingAddress,
-      });
-  
-      await newOrder.save();
-      await Cart.findOneAndDelete({ userEmail });
-  
-      return res.status(201).json({ message: "Order placed successfully, stock updated, and cart cleared!", order: newOrder });
+
+        // Check stock before creating order
+        for (let item of cart.products) {
+            const product = await Product.findById(item.productId);
+            if (!product) {
+                return res.status(404).json({ message: `Product ${item.name} not found` });
+            }
+            if (product.stock < item.quantity) {
+                return res.status(400).json({ message: `Not enough stock for ${product.name}` });
+            }
+        }
+
+        // Decrease stock
+        for (let item of cart.products) {
+            await Product.findByIdAndUpdate(
+                item.productId,
+                { $inc: { stock: -item.quantity } },
+                { new: true }
+            );
+        }
+
+        // Create new order
+        const newOrder = new Order({
+            userEmail,
+            products: cart.products,
+            totalPrice: cart.totalPrice,
+            paymentMethod,
+            shippingAddress,
+            status: "Pending", // Default status
+        });
+
+        await newOrder.save();
+        await Cart.findOneAndDelete({ userEmail });
+
+        // Set up email transporter (NO dotenv)
+        const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: "hamzamirzaop786@gmail.com", // Replace with your actual email
+                pass: "nhaj ddyh frgh iitj" // Replace with your actual app password
+            }
+        });
+
+        // Email content
+        const mailOptions = {
+            from: "hamzamirzaop786@gmail.com",
+            to: userEmail,
+            subject: "Order Confirmation",
+            html: `
+                <h2>Thank you for your order!</h2>
+                <p>Your order has been placed successfully.</p>
+                <p><strong>Order ID:</strong> ${newOrder._id}</p>
+                <p><strong>Status:</strong> Pending</p>
+                <p><strong>Payment Method:</strong> ${paymentMethod}</p>
+                <h3>Shipping Address:</h3>
+                <p>${shippingAddress.address}, ${shippingAddress.city}, ${shippingAddress.country}</p>
+                <h3>Order Summary:</h3>
+                <ul>
+                    ${cart.products.map(item => `<li>${item.name} - ₹${item.price} x ${item.quantity}</li>`).join("")}
+                </ul>
+                <h3>Total Price: ₹${cart.totalPrice}</h3>
+                <br>
+                <p>We will notify you once your order is shipped.</p>
+                <p>Best Regards,<br>Your Shop</p>
+            `,
+        };
+
+        // Send email
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error("Email sending error:", error);
+            }
+        });
+
+        return res.status(201).json({
+            message: "Order placed successfully! Confirmation email sent.",
+            order: newOrder
+        });
+
     } catch (error) {
-      console.error("Order placement error:", error);
-      return res.status(500).json({ message: "Failed to place order", error });
+        console.error("Order placement error:", error);
+        return res.status(500).json({ message: "Failed to place order", error });
     }
-  });
+});
 
 // ✅ Get all user orders
 router.get("/order/history", verifyUser, async (req, res) => {
@@ -531,6 +578,9 @@ router.get("/dissale", async (req, res) => {
         res.status(500).json({ message: "Error fetching order datas", error });
     }
 });
+
+
+
 
 
 export { router as UserRouter };

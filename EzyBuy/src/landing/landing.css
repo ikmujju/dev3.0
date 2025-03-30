@@ -95,3 +95,47 @@ body{
 .content-2 p h1 {
     margin-right:0px;
 }
+
+.slideshow {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.slideshow img {
+    width: 100%;
+    height: 400px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.profileimage {
+    object-fit: cover;
+}
+
+/* Style for the slideshow inside content-2 */
+.slideshow {
+    position: relative;
+    width: 100%;
+    max-width: 500px; /* Adjust based on your layout */
+    height: 300px; /* Adjust as needed */
+    overflow: hidden;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.slide-image {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.slide-image:first-child {
+    display: block;
+}
